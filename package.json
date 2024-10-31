@@ -20,8 +20,8 @@
     "@angular/platform-browser": "^18.2.0",
     "@angular/platform-browser-dynamic": "^18.2.0",
     "@angular/router": "^18.2.0",
+    "@firebasegen/default-connector": "file:dataconnect-generated/js/default-connector",
     "firebase": "^11.0.1",
-    "firebase-tools": "^13.23.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
