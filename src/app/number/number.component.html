@@ -12,7 +12,7 @@
             <div class="ball"></div>
         </div>
         <div class="button-area">
-            <button routerLink="/numberComponent" mat-flat-button>테스트1</button>
+            <button (click)="saveNumber()" mat-flat-button>번호 저장</button>
             <button class="button-left" (click)="remakeNumber()" mat-flat-button>번호 재생성</button>
         </div>
     </div>

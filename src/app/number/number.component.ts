@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { FirebaseDatabaseService } from '../firebase-database.service';
 
 @Component({
   selector: 'app-number',
@@ -13,7 +14,7 @@ export class NumberComponent {
 
   lottoNumbers: Array<number> = [0, 0, 0, 0, 0, 0];
 
-  constructor() {}
+  constructor(private db: FirebaseDatabaseService) {}
   
   ngOnInit() {
     this.setLottoNumber();
@@ -39,7 +40,6 @@ export class NumberComponent {
   }
 
   setLottoBall() {
-    console.log(this.lottoNumbers);
     let balls = document.getElementsByClassName('ball');
     let index = 0;
     let showBall = setInterval(() => {
@@ -73,5 +73,21 @@ export class NumberComponent {
     
     this.setLottoNumber();
     this.setLottoBall();
+  }
+
+  saveNumber() {
+    let balls = document.getElementsByClassName('ball');
+    Array.from(balls).forEach((ball) => {
+      console.log(ball.textContent);
+    });
+    console.log(balls[0].textContent);
+    this.db.setData('history/kimjjong327/' + new Date().getTime(), {
+      number1: 11111,
+      number2: 22222,
+      number3: 33333,
+      number4: 44444,
+      number5: 55555,
+      number6: 66666,
+    })
   }
 }
