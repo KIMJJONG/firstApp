@@ -14,5 +14,5 @@
     </form>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-button [mat-dialog-close]="saveUserInfo()" cdkFocusInitial>입력</button>
+    <button mat-button (click)="saveUserInfo()" cdkFocusInitial>입력</button>
 </mat-dialog-actions>

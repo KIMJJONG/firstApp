@@ -46,7 +46,14 @@ export class NumberComponent {
       balls[index].setAttribute('style', 'visibility: visible; background-color: ' + this.setBallColor(index));
       balls[index].innerHTML = this.lottoNumbers[index].toString();
       index++;
-      if (balls.length === index) clearInterval(showBall);
+      if (balls.length === index) {
+        clearInterval(showBall);
+        let buttons = document.querySelector('button-area')?.childNodes;
+        Array.from(buttons).forEach((button) => {
+          console.log(button);
+          button.removeAttribute('disabled');
+        });
+      }
     }, 1000);
   }
 
@@ -66,6 +73,7 @@ export class NumberComponent {
   }
 
   remakeNumber() {
+    // this.isSetting = true;
     let balls = document.getElementsByClassName('ball');
     for (let index = 0; index < balls.length; index++) {
       balls[index].setAttribute('style', 'visibility: hidden;');
@@ -73,21 +81,18 @@ export class NumberComponent {
     
     this.setLottoNumber();
     this.setLottoBall();
+    // this.isSetting = false;
   }
 
   saveNumber() {
     let balls = document.getElementsByClassName('ball');
-    Array.from(balls).forEach((ball) => {
-      console.log(ball.textContent);
-    });
-    console.log(balls[0].textContent);
     this.db.setData('history/kimjjong327/' + new Date().getTime(), {
-      number1: 11111,
-      number2: 22222,
-      number3: 33333,
-      number4: 44444,
-      number5: 55555,
-      number6: 66666,
+      number1: balls[0].textContent,
+      number2: balls[1].textContent,
+      number3: balls[2].textContent,
+      number4: balls[3].textContent,
+      number5: balls[4].textContent,
+      number6: balls[5].textContent,
     })
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, ref, child, get, set } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCThQWk5ddghbPy94ip82Cy2eD7JwLnLmg",
@@ -20,13 +20,13 @@ const database = getDatabase(app);
 })
 export class FirebaseDatabaseService {
 
-  constructor() { }
+  constructor() {}
 
-  getData() {
-
+  getData(url: string) {
+    return get(child(ref(getDatabase()), url));
   }
 
-  setData(url: string , data: any) {
-    set(ref(database, url), data)
+  setData(url: string, data: any) {
+    return set(ref(database, url), data);
   }
 }
