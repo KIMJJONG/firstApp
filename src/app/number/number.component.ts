@@ -1,18 +1,31 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
 import { FirebaseDatabaseService } from '../firebase-database.service';
 
 @Component({
   selector: 'app-number',
   standalone: true,
-  imports: [CommonModule, MatButtonModule],
+  imports: [
+    RouterLink,
+    CommonModule,
+    MatIconModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatMenuModule
+  ],
   templateUrl: './number.component.html',
   styleUrl: './number.component.scss'
 })
 export class NumberComponent {
 
   lottoNumbers: Array<number> = [0, 0, 0, 0, 0, 0];
+  isActive = true;
+  menuActive = false;
 
   constructor(private db: FirebaseDatabaseService) {}
   
@@ -48,11 +61,7 @@ export class NumberComponent {
       index++;
       if (balls.length === index) {
         clearInterval(showBall);
-        let buttons = document.querySelector('button-area')?.childNodes;
-        Array.from(buttons).forEach((button) => {
-          console.log(button);
-          button.removeAttribute('disabled');
-        });
+        this.isActive = false;
       }
     }, 1000);
   }
@@ -73,7 +82,7 @@ export class NumberComponent {
   }
 
   remakeNumber() {
-    // this.isSetting = true;
+    this.isActive = true;
     let balls = document.getElementsByClassName('ball');
     for (let index = 0; index < balls.length; index++) {
       balls[index].setAttribute('style', 'visibility: hidden;');
@@ -81,18 +90,22 @@ export class NumberComponent {
     
     this.setLottoNumber();
     this.setLottoBall();
-    // this.isSetting = false;
   }
 
   saveNumber() {
     let balls = document.getElementsByClassName('ball');
-    this.db.setData('history/kimjjong327/' + new Date().getTime(), {
+    this.db.setData(`history/${localStorage.getItem('Lotto-ID')}`, {
       number1: balls[0].textContent,
       number2: balls[1].textContent,
       number3: balls[2].textContent,
       number4: balls[3].textContent,
       number5: balls[4].textContent,
       number6: balls[5].textContent,
+      recodeTime: new Date().getTime()
     })
+  }
+
+  controlMenu() {
+    this.menuActive = true;
   }
 }

@@ -30,9 +30,9 @@ export class HomeComponent {
       }
     }).catch(() => {
       this._snackBar.open('계정 확인 실패', '');
-        setTimeout(() => {
-          this._snackBar.dismiss();
-        }, 3000)
+      setTimeout(() => {
+        this._snackBar.dismiss();
+      }, 3000);
     });
   }
 

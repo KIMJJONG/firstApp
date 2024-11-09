@@ -1,3 +1,27 @@
+<mat-toolbar>
+    <button mat-icon-button class="example-icon">
+        <mat-icon>arrow_back_ios_new</mat-icon>
+    </button>
+    <span>로또 번호 생성</span>
+    <span class="spacer"></span>
+    <button mat-icon-button class="example-icon" [matMenuTriggerFor]="menu">
+        <mat-icon>menu</mat-icon>
+    </button>
+</mat-toolbar>
+<mat-menu #menu="matMenu">
+    <button routerLink="/homeComponent" mat-menu-item>
+        <mat-icon>home</mat-icon>
+        <span>홈</span>
+    </button>
+    <button routerLink="/numberComponent" mat-menu-item>
+        <mat-icon>pin</mat-icon>
+        <span>로또 번호 생성</span>
+    </button>
+    <button routerLink="/historyComponent" mat-menu-item>
+        <mat-icon>history</mat-icon>
+        <span>로또 번호 기록</span>
+    </button>
+  </mat-menu>
 <div class="number-content">
     <div class="number-top">
 
@@ -12,8 +36,8 @@
             <div class="ball"></div>
         </div>
         <div class="button-area">
-            <button (click)="saveNumber()" mat-flat-button disabled>번호 저장</button>
-            <button class="button-left" (click)="remakeNumber()" mat-flat-button disabled>번호 재생성</button>
+            <button (click)="saveNumber()" mat-flat-button [disabled]="isActive">번호 저장</button>
+            <button class="button-left" (click)="remakeNumber()" mat-flat-button [disabled]="isActive">번호 재생성</button>
         </div>
     </div>
     <div class="number-bottom">
